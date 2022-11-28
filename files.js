@@ -49,14 +49,14 @@ const fs = require("fs");
 // }
 
 // deleting files
-if (!fs.existsSync("./docs/deteleme.txt")) {
-  fs.writeFile("./docs/deteleme.txt", "Delete file", (err) => {
-    if (err) console.log(err);
-    console.log("file created");
-  });
-} else {
-  fs.unlink("./docs/deteleme.txt", (err) => {
-    if (err) console.log(err);
-    console.log("file deleted");
-  });
-}
+// if (!fs.existsSync("./docs/deteleme.txt")) {
+//   fs.writeFile("./docs/deteleme.txt", "Delete file", (err) => {
+//     if (err) console.log(err);
+//     console.log("file created");
+//   });
+// } else {
+//   fs.unlink("./docs/deteleme.txt", (err) => {
+//     if (err) console.log(err);
+//     console.log("file deleted");
+//   });
+// }
