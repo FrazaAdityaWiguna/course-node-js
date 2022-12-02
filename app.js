@@ -16,12 +16,17 @@ app.listen(port);
 app.get("/", (req, res) => {
   // res.send("<p>hello express</p>");
 
-  // console.log("Dirname: ", __dirname);
-  res.render("index");
+  const blogs = [
+    { title: "Fraza aditya wiguna", snippet: "lorem ipsum dolor sit amet" },
+    { title: "Nada zubaidah", snippet: "lorem ipsum dolor sit amet" },
+    { title: "next money future", snippet: "lorem ipsum dolor sit amet" },
+  ];
+
+  res.render("index", { title: "Home", blogs });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", { title: "About" });
 });
 
 // redirect
@@ -30,10 +35,10 @@ app.get("/about-us", (req, res) => {
 });
 
 app.get("/blogs/create", (req, res) => {
-  res.render("create");
+  res.render("create", { title: "Create a new blog" });
 });
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { title: "404  " });
 });
