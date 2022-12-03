@@ -5,6 +5,10 @@ const morgan = require("morgan");
 const app = express();
 const port = 3000;
 
+// connect to monggoDB
+const dbURI =
+  "mongodb+srv://admin:admin#1234@nodetuts.ydef603.mongodb.net/?retryWrites=true&w=majority";
+
 // register view engine with ejs
 app.set("view engine", "ejs");
 
