@@ -13,6 +13,16 @@ app.set("view engine", "ejs");
 // listen for request
 app.listen(port);
 
+app.use((req, res, next) => {
+  console.log("new request mode");
+  console.log("host:", req.hostname);
+  console.log("path:", req.path);
+  console.log("method:", req.method);
+
+  // next for next from middleware (app.use)
+  next();
+});
+
 app.get("/", (req, res) => {
   // res.send("<p>hello express</p>");
 
