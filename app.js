@@ -30,6 +30,32 @@ app.use(express.static("public"));
 
 app.use(morgan("dev"));
 
+// routes
+app.get("/", (req, res) => {
+  res.redirect("/blogs");
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About" });
+});
+
+// redirect
+app.get("/about-us", (req, res) => {
+  res.redirect("/about");
+});
+
+// Blog routes
+
+app.get("/blogs", (req, res) => {
+  Blog.find()
+    // sort as descending
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { title: "All Blogs", blogs: result });
+    })
+    .catch((err) => console.log(err));
+});
+
 // mongoose and mongo sandbox routes
 app.get("/add-blog", (req, res) => {
   const blog = new Blog({
@@ -62,27 +88,6 @@ app.get("/single-blog", (req, res) => {
       res.send(result);
     })
     .catch((err) => console.log(err));
-});
-
-app.get("/", (req, res) => {
-  // res.send("<p>hello express</p>");
-
-  const blogs = [
-    { title: "Fraza aditya wiguna", snippet: "lorem ipsum dolor sit amet" },
-    { title: "Nada zubaidah", snippet: "lorem ipsum dolor sit amet" },
-    { title: "next money future", snippet: "lorem ipsum dolor sit amet" },
-  ];
-
-  res.render("index", { title: "Home", blogs });
-});
-
-app.get("/about", (req, res) => {
-  res.render("about", { title: "About" });
-});
-
-// redirect
-app.get("/about-us", (req, res) => {
-  res.redirect("/about");
 });
 
 app.get("/blogs/create", (req, res) => {
