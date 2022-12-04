@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 // express application
 const app = express();
@@ -7,16 +8,18 @@ const port = 3000;
 
 // connect to monggoDB
 const dbURI =
-  "mongodb+srv://admin:admin#1234@nodetuts.ydef603.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin1234@nodetuts.ydef603.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((res) => app.listen(port))
+  .catch((err) => console.log("err: ", err));
 
 // register view engine with ejs
 app.set("view engine", "ejs");
 
 // if folder views change name
 // app.set("views", "myViews");
-
-// listen for request
-app.listen(port);
 
 // middleware static file
 app.use(express.static("public"));
