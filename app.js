@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Blog = require("./models/blog");
+const { render } = require("express/lib/response");
 
 // express application
 const app = express();
@@ -78,10 +79,12 @@ app.get("/all-blogs", (req, res) => {
 });
 
 // get single blog
-app.get("/single-blog", (req, res) => {
-  Blog.findById("638caead270103a3e761cc17")
+app.get("/blog/:id", (req, res) => {
+  const idBlog = req.params.id;
+
+  Blog.findById(idBlog)
     .then((result) => {
-      res.send(result);
+      res.render("details", { title: "Blog Details", blog: result });
     })
     .catch((err) => console.log(err));
 });
