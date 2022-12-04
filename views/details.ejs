@@ -21,7 +21,7 @@
             <p class="card-text">
               <%= blog.body %>
             </p>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" data-doc="<%= blog._id %>" id='delete' class="btn btn-danger">Delete</button>
           </div>
         </div>
       </div>
@@ -34,6 +34,20 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+      <script>
+        const btnDelete = document.querySelector('button#delete')
+
+        btnDelete.addEventListener('click', (e) => {
+          const endpoint = `/blog/delete/${btnDelete.dataset.doc}`
+
+          fetch(endpoint, { method: 'DELETE' })
+            .then((response) => {
+              return response.json()
+            })
+            .then(data => window.location.href = data.redirect)
+            .catch(err => console.log(err))
+        })
+      </script>
   </body>
 
 </html>

@@ -93,7 +93,7 @@ app.get("/blogs/create", (req, res) => {
   res.render("create", { title: "Create a new blog" });
 });
 
-// post blog
+// POST blog
 app.post("/post-blog", (req, res) => {
   const blog = new Blog(req.body);
 
@@ -101,6 +101,18 @@ app.post("/post-blog", (req, res) => {
     .save()
     .then((result) => {
       res.redirect("/blogs");
+    })
+    .catch((err) => console.log(err));
+});
+
+// DELETE blog
+app.delete("/blog/delete/:id", (req, res) => {
+  const id = req.params.id;
+
+  Blog.findByIdAndDelete(id)
+    .then((result) => {
+      console.log("masuk");
+      res.json({ redirect: "/blogs" });
     })
     .catch((err) => console.log(err));
 });
