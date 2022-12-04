@@ -92,7 +92,6 @@ app.get("/blogs/create", (req, res) => {
 
 // post blog
 app.post("/post-blog", (req, res) => {
-  console.log(req.body.blog_title);
   const blog = new Blog(req.body);
 
   blog
