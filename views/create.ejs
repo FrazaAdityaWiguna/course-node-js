@@ -9,18 +9,18 @@
             <h2>Create Content</h2>
         </div>
         
-        <form>
+        <form action="/post-blog" method="POST">
             <div class="mb-3">
-                <label for="blog_title" class="form-label">Blog Title</label>
-                <input type="text" class="form-control" id="blog_title" placeholder="Title..." required>
+                <label for="title" class="form-label">Blog Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title..." required>
             </div>
             <div class="mb-3">
-                <label for="blog_snipper" class="form-label">Blog Snippet</label>
-                <input type="text" class="form-control" id="blog_snipper" placeholder="Snippet..." required>
+                <label for="snippet" class="form-label">Blog Snippet</label>
+                <input type="text" class="form-control" id="snippet" name='snippet' placeholder="Snippet..." required>
             </div>
             <div class="mb-3">
-                <label for="blog_body" class="form-label">Blog Body</label>
-                <textarea class="form-control" id="blog_body" rows="3" required></textarea>
+                <label for="body" class="form-label">Blog Body</label>
+                <textarea class="form-control" id="body" name='body' rows="3" required></textarea>
             </div>
             <button class="btn btn-primary">Submit</button>
         </form>

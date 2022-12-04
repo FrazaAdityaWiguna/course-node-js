@@ -22,12 +22,9 @@ mongoose
 // register view engine with ejs
 app.set("view engine", "ejs");
 
-// if folder views change name
-// app.set("views", "myViews");
-
 // middleware static file
 app.use(express.static("public"));
-
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // routes
@@ -45,7 +42,6 @@ app.get("/about-us", (req, res) => {
 });
 
 // Blog routes
-
 app.get("/blogs", (req, res) => {
   Blog.find()
     // sort as descending
@@ -92,6 +88,19 @@ app.get("/single-blog", (req, res) => {
 
 app.get("/blogs/create", (req, res) => {
   res.render("create", { title: "Create a new blog" });
+});
+
+// post blog
+app.post("/post-blog", (req, res) => {
+  console.log(req.body.blog_title);
+  const blog = new Blog(req.body);
+
+  blog
+    .save()
+    .then((result) => {
+      res.redirect("/blogs");
+    })
+    .catch((err) => console.log(err));
 });
 
 // 404 page
