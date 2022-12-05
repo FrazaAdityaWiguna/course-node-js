@@ -1,80 +1,24 @@
 const express = require("express");
-const Blog = require("../models/blog");
+const blogController = require("../controllers/blogController");
 
 const router = express.Router();
 
 // Blog routes
-router.get("/", (req, res) => {
-  Blog.find()
-    // sort as descending
-    .sort({ createdAt: -1 })
-    .then((result) => {
-      res.render("index", { title: "All Blogs", blogs: result });
-    })
-    .catch((err) => console.log(err));
-});
-
-// mongoose and mongo sandbox routes
-router.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "new blog 2",
-    snippet: "about my new blog",
-    body: "more about my new blog",
-  });
-
-  blog
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => console.log(err));
-});
+router.get("/", blogController.blog_index);
 
 // get all data blogs
-router.get("/all-blogs", (req, res) => {
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => console.log(err));
-});
+router.get("/all-blogs", blogController.blog_detail);
 
-router.get("/create", (req, res) => {
-  res.render("create", { title: "Create a new blog" });
-});
+// render to page create blog post
+router.get("/create", blogController.blog_create_get);
 
 // get single blog
-router.get("/:id", (req, res) => {
-  const idBlog = req.params.id;
-
-  Blog.findById(idBlog)
-    .then((result) => {
-      res.render("details", { title: "Blog Details", blog: result });
-    })
-    .catch((err) => console.log(err));
-});
+router.get("/:id", blogController.get_single_blog);
 
 // POST blog
-router.post("/post-blog", (req, res) => {
-  const blog = new Blog(req.body);
-
-  blog
-    .save()
-    .then((result) => {
-      res.redirect("/blogs");
-    })
-    .catch((err) => console.log(err));
-});
+router.post("/post-blog", blogController.blog_create_post);
 
 // DELETE blog
-router.delete("/delete/:id", (req, res) => {
-  const id = req.params.id;
-
-  Blog.findByIdAndDelete(id)
-    .then((result) => {
-      res.json({ redirect: "/blogs" });
-    })
-    .catch((err) => console.log(err));
-});
+router.delete("/delete/:id", blogController.blog_delete_post);
 
 module.exports = router;
