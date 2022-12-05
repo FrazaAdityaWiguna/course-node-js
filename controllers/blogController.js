@@ -29,7 +29,7 @@ const get_single_blog = (req, res) => {
     .then((result) => {
       res.render("blogs/details", { title: "Blog Details", blog: result });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.status(404).render("404", { title: "Blog not found" }));
 };
 
 const blog_create_post = (req, res) => {
