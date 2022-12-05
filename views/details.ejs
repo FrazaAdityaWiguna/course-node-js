@@ -38,7 +38,7 @@
         const btnDelete = document.querySelector('button#delete')
 
         btnDelete.addEventListener('click', (e) => {
-          const endpoint = `/blog/delete/${btnDelete.dataset.doc}`
+          const endpoint = `/blogs/delete/${btnDelete.dataset.doc}`
 
           fetch(endpoint, { method: 'DELETE' })
             .then((response) => {
