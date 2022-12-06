@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const env = require("dotenv").config();
 const blogRoutes = require("./routes/blogRoutes");
 
 // express application
@@ -8,8 +9,7 @@ const app = express();
 const port = 3000;
 
 // connect to monggoDB
-const dbURI =
-  "mongodb+srv://admin:admin1234@nodetuts.ydef603.mongodb.net/note-tuts?retryWrites=true&w=majority";
+const dbURI = env.parsed.MONGGODB_ENV;
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
